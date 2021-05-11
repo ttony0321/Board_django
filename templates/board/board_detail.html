@@ -1,0 +1,24 @@
+{% extends "user/base.html" %}
+{% block contents %}
+    <div class="card">
+        {# 제목, 분류, 작성일 #}
+        <div class="card-header">
+            <strong>{{ board.title }}</strong><span>[공지사항]</span>
+            <span>{{ board.registered_date|date:'Y.m.d. H:i' }}</span>
+        </div>
+        <div class="card-body">
+            {# 작성자, 조회수 #}
+            <div>
+                <span>작성자 : {{ board.writer }}</span>
+                <span>조회수 : {{ board.views }}</span>
+            </div>
+            {# 내용 #}
+            <div>
+                {{ board.content }}
+            </div>
+        </div>
+    </div>
+    <div>
+    <button onclick="location.href='/board/'">목록으로</button>
+    </div>
+{% endblock %}
