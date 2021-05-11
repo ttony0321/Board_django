@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Board(models.Model):
-    title = models.CharField(max_length=64, verbose_name='제목')
+    title = models.CharField(max_length=64, verbose_name='제목', null=True)
     content = models.TextField(verbose_name='내용')
     views = models.PositiveIntegerField(default=0,verbose_name='조회수')
     registered_date = models.DateTimeField(auto_now_add=True, verbose_name='등록시간')
