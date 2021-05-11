@@ -14,4 +14,4 @@ class BoardWriteForm(forms.ModelForm):
 
     class Meta:
         model = Board
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'top_fixed']

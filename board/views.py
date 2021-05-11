@@ -43,6 +43,8 @@ class BoardListView(ListView):
             context['q'] = search_keyword
         context['type'] = search_type
 
+        board_fixed = Board.objects.filter(top_fixed=True).order_by('-registered_date')
+        context['board_fixed'] = board_fixed
         return context
 
 #게시글 검색 기능 구현

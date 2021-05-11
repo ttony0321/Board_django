@@ -14,7 +14,7 @@
             </div>
             {# 내용 #}
             <div>
-                {{ board.content }}
+                {{ board.content | safe}}{# html 태그가 그대로 적용되어 출력되는것을 방지 #}
             </div>
         </div>
     </div>
