@@ -22,7 +22,9 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="">Django Board</a>
+<div>
+    <a class="navbar-brand" onclick=location.href="{% url 'home' %}" style="display: inline">Django Board</a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,21 +32,21 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" onclick="location.href='/'">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" onclick=location.href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Board</a>
+                <a class="nav-link" href="#" onclick=location.href="{% url 'board:board_list' %}">Board</a>
             </li>
             {% if not request.session.user %}
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='user/login/'">Login</a>
+                    <a class="nav-link" onclick=location.href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='user/register/'">Register</a>
+                    <a class="nav-link" onclick=location.href="{% url 'register' %}">Register</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='user/logout/'">Logout</a>
+                    <a class="nav-link" onclick=location.href="{% url 'logout' %}">Logout</a>
                 </li>
             {% endif %}
         </ul>
