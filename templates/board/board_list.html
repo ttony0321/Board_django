@@ -2,7 +2,7 @@
 {% block contents %}
     <div class="row mt-5">
         <div class="col-12">
-            <h4 style="font-weight: bold;">게시판</h4>
+            <h4 style="font-weight: bold;">게시판</h4> {# 제목 #}
             {% if q %}
                 <h5>'{{ q }}' 검색 결과 입니다.</h5>
             {% endif %}
@@ -19,7 +19,7 @@
                     <th>views</th>
                 </tr>
                 {% if q %}
-                {% else %}
+                {% else %}  {# 공지사항 #}
                 {% if board_fixed %}
                 {% for board in board_fixed %}
                     <tr class="'text-center" style="cursor:pointer" onclick="location.href='/board/{{ board.id }}'">
@@ -35,7 +35,7 @@
             {% endif %}
             </thred>
             <tbody>
-            {% if board_list %}
+            {% if board_list %}{# 일반일때 #}
                 {% for board in board_list %}
                     <tr class="'text-center" style="cursor:pointer" onclick="location.href='/board/{{ board.id }}'">
                         <td>{{ board.id }}</td>

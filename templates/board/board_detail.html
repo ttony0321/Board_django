@@ -1,24 +1,65 @@
 {% extends "user/base.html" %}
 {% block contents %}
-    <div class="card">
-        {# 제목, 분류, 작성일 #}
-        <div class="card-header">
-            <strong>{{ board.title }}</strong><span>[공지사항]</span>
-            <span>{{ board.registered_date|date:'Y.m.d. H:i' }}</span>
-        </div>
-        <div class="card-body">
-            {# 작성자, 조회수 #}
-            <div>
-                <span>작성자 : {{ board.writer }}</span>
-                <span>조회수 : {{ board.views }}</span>
+    <div class="row-mt-5">
+        <div class="col-12">
+            <div class="card">
+                {# 제목, 분류, 작성일 #}
+                <div class="card-header">
+                    <strong>{{ board.title }}</strong><span>[공지사항]</span>
+                    <span>{{ board.registered_date|date:'Y.m.d. H:i' }}</span>
+                </div>
+                <div class="card-body">
+                    {# 작성자, 조회수 #}
+                    <div>
+                        <span>작성자 : {{ board.writer }}</span>
+                        <span>조회수 : {{ board.views }}</span>
+                    </div>
+                    <hr>
+                    {% if board.upload_files %}
+                        <div class="col-12 text-right">
+                        <span style="color: gray">첨부파일 :&nbsp</span>
+                        <a id="id_upload_file" href="{% url 'board:board_download' board.id %}">{{ board.filename|truncatechars:25 }}</a>
+                        </div>
+                    {% endif %}
+                    {# 내용 #}
+                    <div>
+                        {{ board.content | safe }}{# html 태그가 그대로 적용되어 출력되는것을 방지 #}
+                    </div>
+                </div>
             </div>
-            {# 내용 #}
             <div>
-                {{ board.content | safe}}{# html 태그가 그대로 적용되어 출력되는것을 방지 #}
+                {% if board_auth %}
+                    <button class="btn btn-sm" onclick="location.href='/board/{{ board.id }}/edit/'">수정</button>
+                    <button class="btn btn-sm" data-toggle="modal" data-target="#delete_modal">삭제</button>
+                    <button class="btn btn-sm" onclick="location.href='/board/'">목록으로</button>
+                {% else %}
+                    <button class="btn btn-sm" onclick="location.href='/board/'">목록으로</button>
+                {% endif %}
             </div>
         </div>
     </div>
-    <div>
-    <button onclick="location.href='/board/'">목록으로</button>
+    <div id="delete_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">삭제경고</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>게시글을 삭제하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="delete_modal()" type="button" class="btn btn-dark">삭제하기</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">취소하기</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <script type="text/javascript">
+    function delete_modal(){
+        location.replace('/board/{{ board.id }}/delete/');
+    }
+    </script>
 {% endblock %}

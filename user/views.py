@@ -8,16 +8,15 @@ from django.contrib.auth.hashers import make_password
 def home(request):
     return render(request, '../templates/user/home.html')
 
-def login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            request.session['user'] = form.user_id
-            return redirect('/')
-    else:
-        form = LoginForm()
+class LoginView(FormView):
+    template_name = 'user/login.html'
+    form_class = LoginForm
+    success_url = '/'
 
-    return render(request, '../templates/user/login.html', {'form': form})
+    def form_valid(self, form):
+        self.request.session['user'] = form.data.get('userid')
+
+        return super().form_valid(form)
 
 def logout(request):
     if request.session.get('user'): #로그인 되어있을때
