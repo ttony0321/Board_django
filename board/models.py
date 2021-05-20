@@ -20,6 +20,8 @@ class Board(models.Model):
     writer = models.ForeignKey('user.User', on_delete=models.SET_NULL, null=True)#user.User 작성자 불러오기
     upload_files = models.FileField(upload_to=get_file_path, null=True, blank=True, verbose_name='파일')
     filename = models.CharField(max_length=64, null=True, verbose_name='첨부파일명')
+
+
     def __str__(self):
         return self.title
 
