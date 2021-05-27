@@ -1,6 +1,9 @@
 from .models import User
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.conf import settings
+from django.http import HttpResponse
+
 
 
 # 로그인 확인
@@ -8,7 +11,7 @@ def login_required(function):
     def wrap(request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.info(request, "로그인한 사용자만 이용할수 있습니다.")
-            return redirect('user/login')
+            return redirect(settings.LOGIN_URL)
         return function(request, *args, **kwargs)
 
     return wrap

@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('board/', include('board.urls')),
-    path('comment/', include('comment.urls')),
+    path('free/', include('free.urls')),
     path('', views.home, name='home')
 ]

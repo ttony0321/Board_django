@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 
 def home(request):
     return render(request, '../templates/user/home.html')
-
+# ../templates/user/home.html
 class LoginView(FormView):
     template_name = 'user/login.html'
     form_class = LoginForm
@@ -34,7 +34,7 @@ class RegisterView(FormView):
         user = User(
             userid=form.data.get('userid'),
             password=make_password(form.data.get('password')),
-            nickname=form.data.get('nickname')
+            email=form.data.get('email')
         )
         user.save()
         return super().form_valid(form)
