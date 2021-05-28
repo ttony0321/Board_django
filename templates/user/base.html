@@ -83,6 +83,15 @@
     {% block contents %}
     {% endblock %}
 </div>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}
+            <script>
+                alert("{{ message.message }}") <!-- message alert script -->
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 </body>
 
 </html>

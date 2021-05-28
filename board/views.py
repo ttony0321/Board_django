@@ -144,7 +144,7 @@ def board_edit_view(request, pk):
     board = Board.objects.get(id=pk)
 
     if request.method == 'POST':
-        if (board.writer == request.user):
+        if (board.writer == request.user or request.user.level == '0'):
             file_change_check = request.POST.get('fileChange', False)
             file_check = request.POST.get('upload_files_clear', False)
             if file_check or file_change_check:
@@ -160,7 +160,7 @@ def board_edit_view(request, pk):
                 return redirect('/board/' + str(pk))
     else:
         board = Board.objects.get(id=pk)
-        if board.writer == request.user:
+        if board.writer == request.user or request.user.level == '0':
             form = BoardWriteForm(instance=board)
             context = {
                 'form': form,
@@ -172,13 +172,13 @@ def board_edit_view(request, pk):
             return render(request, "board/board_write.html", context)
         else:
             messages.error(request, "본인 게시글이 아닙니다.")
-            return redirect('/notice/' + str(pk))
+            return redirect('/board/' + str(pk))
 
 #게시글 삭제
 @login_required
 def board_delete_view(request, pk):
     board = Board.objects.get(id=pk)#게시글의 pk값을 id로 받는다
-    if board.writer == request.user:
+    if board.writer == request.user or request.user.level == '0':
         board.delete()
         messages.success(request, '삭제되었습니다.')
         return redirect('/board/')

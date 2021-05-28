@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div>
-                {% if board_auth %}
+                {% if board_auth or request.user.level == '0' %}
                     <button class="btn btn-sm" onclick="location.href='/board/{{ board.id }}/edit/'">수정</button>
                     <button class="btn btn-sm" data-toggle="modal" data-target="#delete_modal">삭제</button>
                     <button class="btn btn-sm" onclick="location.href='/board/'">목록으로</button>

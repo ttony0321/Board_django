@@ -89,7 +89,7 @@
             </div>
         </form>
         <div>
-            {% if request.session.user %}
+            {% if request.user.level == '0' or request.user.level == '1' %}
                 <div>
                     <a href="{% url 'board:board_write' %}" class="btn btn-sm">글쓰기</a>
                 </div>

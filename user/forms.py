@@ -8,7 +8,7 @@ class LoginForm(forms.Form):
         error_messages={
             'required': '아이디를 입력해주세요'
     },
-        max_length=32, label='사용자 이름'
+        max_length=32, label='사용자 ID'
     )
     password = forms.CharField(
         error_messages={
@@ -38,7 +38,7 @@ class RegisterForm(forms.Form):
         error_messages={
             'required': 'please enter the userid'
         },
-        max_length=32, label='사용자 이름'
+        max_length=32, label='사용자 ID'
     )
     password = forms.CharField(
         error_messages={

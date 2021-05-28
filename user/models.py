@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from .choice import *
 
 
 # Create your models here.
+###level: 사용권한
+###auth: 인증번호
 class UserManager(BaseUserManager):
-    def create_user(self, userid, password, email):
+    def create_user(self, userid, password, email, **extra):
         if not userid:
             raise ValueError("User must have an userid")
         if not password:
@@ -19,6 +22,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    #admin 관리자 계정 만들기
     def create_superuser(self, userid, password, email=None):
         user = self.create_user(userid, password, email)
 
@@ -40,6 +44,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                                 verbose_name='비밀번호')
     email = models.EmailField(max_length=64,
                                 verbose_name='이메일', unique=True, null=True)
+    level = models.CharField(max_length= 18,
+                             verbose_name='등급', choices=LEVEL_CHOICES, default=2)
     registered_dttm = models.DateTimeField(auto_now_add=True,
                                            verbose_name='등록시간')
 

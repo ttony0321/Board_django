@@ -134,8 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-#Login setting
-LOGIN_URL = '/user/login/'
 
-#유저 모델
-AUTH_USER_MODEL = 'user.User'
+LOGIN_URL = '/user/login/'  #Login setting
+AUTH_USER_MODEL = 'user.User'   #유저 모델
