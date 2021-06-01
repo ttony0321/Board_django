@@ -2,7 +2,7 @@
 {% block contents %}
     <div class="row-mt-5">
         <div class="col-12">
-            <div class="card">
+            <div class="card" style="margin-bottom: 10px;">
                 {# 제목, 분류, 작성일 #}
                 <div class="card-header">
                     <strong>{{ board.title }}</strong><span>[공지사항]</span>
@@ -17,8 +17,9 @@
                     <hr>
                     {% if board.upload_files %}
                         <div class="col-12 text-right">
-                        <span style="color: gray">첨부파일 :&nbsp</span>
-                        <a id="id_upload_file" href="{% url 'board:board_download' board.id %}">{{ board.filename|truncatechars:25 }}</a>
+                            <span style="color: gray">첨부파일 :&nbsp</span>
+                            <a id="id_upload_file"
+                               href="{% url 'board:board_download' board.id %}">{{ board.filename|truncatechars:25 }}</a>
                         </div>
                     {% endif %}
                     {# 내용 #}
@@ -29,11 +30,11 @@
             </div>
             <div>
                 {% if board_auth or request.user.level == '0' %}
-                    <button class="btn btn-sm" onclick="location.href='/board/{{ board.id }}/edit/'">수정</button>
-                    <button class="btn btn-sm" data-toggle="modal" data-target="#delete_modal">삭제</button>
-                    <button class="btn btn-sm" onclick="location.href='/board/'">목록으로</button>
+                    <button class="btn btn-info" onclick="location.href='/board/{{ board.id }}/edit/'">수정</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#delete_modal">삭제</button>
+                    <button class="btn btn-info" onclick="location.href='/board/'">목록으로</button>
                 {% else %}
-                    <button class="btn btn-sm" onclick="location.href='/board/'">목록으로</button>
+                    <button class="btn btn-info" onclick="location.href='/board/'">목록으로</button>
                 {% endif %}
             </div>
         </div>
@@ -58,8 +59,8 @@
         </div>
     </div>
     <script type="text/javascript">
-    function delete_modal(){
-        location.replace('/board/{{ board.id }}/delete/');
-    }
+        function delete_modal() {
+            location.replace('/board/{{ board.id }}/delete/');
+        }
     </script>
 {% endblock %}

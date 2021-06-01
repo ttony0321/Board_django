@@ -81,8 +81,8 @@
                             <input type="text" name="q" value="{{ q }}" class="form-control form-control-sm"
                                    style="width: 15em;" placeholder="검색어를 입력해주세요.">
                         </div>
-                        <div class="col" style="margin-top: 10px">
-                            <button class="btn btn-sm" type="submit" id="search_btn">검색</button>
+                        <div class="col" style="margin-top: 8px">
+                            <button class="btn btn-info" type="submit" id="search_btn">검색</button>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
         <div>
             {% if request.user.level == '0' or request.user.level == '1' %}
                 <div>
-                    <a href="{% url 'board:board_write' %}" class="btn btn-sm">글쓰기</a>
+                    <a href="{% url 'board:board_write' %}" class="btn btn-info">글쓰기</a>
                 </div>
             {% endif %}
         </div>

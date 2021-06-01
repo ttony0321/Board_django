@@ -42,6 +42,7 @@
             <h4 style="font-weight: bold;">공지사항</h4>
         </div>
     </div>
+    <br>
     <div class="row-mt-5">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -70,14 +71,18 @@
                 </div>
             </div>
             <div class="text-right">
-                <label>
+            <button class="btn btn-info"><label style="background-color: rgb(23 ,162, 184); border-radius: .25rem; margin: 0px">
                     {{ form.top_fixed }}
                     <span>상단에 표시하기</span>
-                </label>
+                </label></button>
+{#                <label style="background-color: rgb(23 ,162, 184); border-radius: .25rem;  padding: 7px 0px; margin: 0px">#}
+{#                    {{ form.top_fixed }}#}
+{#                    <span>상단에 표시하기</span>#}
+{#                </label>#}
                 {% if edit %}
                     <button type="submit" class="btn btn-sm">{{ edit }}</button>
                 {% else %}
-                    <button type="submit" id="write" class="btn btn-sm">작성하기</button>
+                    <button type="submit" id="write" class="btn btn-info">작성하기</button>
                 {% endif %}
                 <input type="checkbox" id="fileChangeCheck" name="fileChange" style="display: none">
             </div>
